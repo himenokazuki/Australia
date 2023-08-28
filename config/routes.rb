@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
-  root to: 'public/homes#top'
+  namespace :users do
+    get 'user/show　'
+    get 'user/edit'
+    get 'user/update'
+    get 'user/confirm'
+  end
+  namespace :users do
+    get 'posts/index'
+    get 'posts/show'
+  end
+  root to: 'user/homes#top'
 
   devise_for :admin, controllers: {
   sessions: "admin/sessions"
