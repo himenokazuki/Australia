@@ -1,24 +1,34 @@
 Rails.application.routes.draw do
-  namespace :users do
-    get 'user/show　'
-    get 'user/edit'
-    get 'user/update'
-    get 'user/confirm'
+  namespace :admin do
+    get 'users/show'
+    get 'users/index'
+    get 'users/edit'
   end
-  namespace :users do
-    get 'posts/index'
+  namespace :admin do
     get 'posts/show'
+    get 'posts/index'
   end
-  root to: 'user/homes#top'
-
-  devise_for :admin, controllers: {
-  sessions: "admin/sessions"
-  }
+  root 'homes#top'
+  # namespace :users do
+  #   get 'user/show　'
+  #   get 'user/edit'
+  #   get 'user/update'
+  #   get 'user/confirm'
+  # end
+  # namespace :users do
+  #   get 'posts/index'
+  #   get 'posts/show'
+  # end
   
-  devise_for :users, controllers: {
-  registrations: "users/registrations",
-  sessions: 'user/sessions'
-  }
+
+  # devise_for :admin, controllers: {
+  # sessions: "admin/sessions"
+  # }
+  
+  # devise_for :users, controllers: {
+  # registrations: "users/registrations",
+  # sessions: 'user/sessions'
+  # }
  
  
  
