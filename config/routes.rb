@@ -8,16 +8,6 @@ get 'posts/show'  =>  "posts#show"
 get 'posts/index' => "posts#index"
 end
 
-namespace :users do
-get 'user/show'     => 'user#show'
-get 'user/edit'     => 'user#edit'
-patch 'user/update' => 'user#update'
-get 'user/confirm'  => 'user#confirm'
-get 'posts/index'   => 'posts#index'
-get 'posts/show'    => 'posts#show'
-end
-
-
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 sessions: "admin/sessions"
 }
@@ -27,6 +17,13 @@ registrations: "users/registrations",
 sessions: 'users/sessions'
 }
 
+namespace :users do
+ resources :users, only: [:edit, :show, :update, :destroy] do
+  resources :posts, only: [:index, :show]
+ end
+   resources :posts, only: [:new, :create]
+ get 'users/confirm/:id'  => 'users#confirm'
+end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 
