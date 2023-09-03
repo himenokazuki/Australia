@@ -19,9 +19,9 @@ sessions: 'users/sessions'
 
 namespace :users do
  resources :users, only: [:edit, :show, :update, :destroy] do
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:show , :destroy]
  end
-   resources :posts, only: [:new, :create]
+   resources :posts, only: [:index, :new, :create]
  get 'users/confirm/:id'  => 'users#confirm'
 end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,8 +1,8 @@
 class Users::UsersController < ApplicationController
   def show
-    @user=current_user
-    @posts=Post.all
-    @post_new=Post.new
+   # @user=current_user
+    @users=User.find(params[:id])
+    #@posts=@user.posts
   end
 
   def edit
