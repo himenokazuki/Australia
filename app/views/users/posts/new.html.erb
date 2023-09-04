@@ -1,3 +1,14 @@
+<div class="col-md-3">
+<h2>ようこそ<%= @user.name %>さん</h2>
+  <%= image_tag @user.get_profile_image(100,100) %>
+<table class="table">
+  <tbody>
+  <tr>
+	  <th>name</th>
+	  <th><%= @user.name %></th>
+  </tr>
+</tbody>
+</table>
 <h1>お気に入りの場所を投稿しよう！</h1>
 
 <%= form_with model: @post ,url:users_posts_path, method: :post do |f| %>

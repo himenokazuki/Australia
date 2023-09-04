@@ -10,23 +10,25 @@ class Users::PostsController < ApplicationController
     #@posts = Post.all
     #@post_new = Post.new
   end
-  
+
   def new
     @post = Post.new
+    @user = current_user
   end
-  
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id#アソシエーション１対多の関係
-    post.save
+    @post.save
+    redirect_to users_user_path(current_user)
   end
-  
+
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    redirect_to'/users/users/:id'
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to users_user_path(current_user)
   end
-  
+
   private
   # ストロングパラメータ
   def post_params
