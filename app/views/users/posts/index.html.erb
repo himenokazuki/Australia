@@ -1,14 +1,31 @@
 <h1>Users::Posts#index</h1>
-<p>Find me in app/views/users/posts/index.html.erb</p>
 
+ <%= form_with model: @post,url: search_post_path(@post.all), local: true, method: :get do |f| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+ <% end %>
+<div>
+  <%= notice %>
+</div>
 
+<h2>検索結果 "<%= @keyword %>"</h2>
+  <ul>
+    <% @post.each do |post| %>
+      <li>
+        <%= link_to users_user_post(post.id) do %>
+          
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 <% @posts.each do |post| %>
 <div>
 <%= post.introduction %>
 <%= image_tag post.get_image %>
 <%= link_to post.user.name, users_user_path(post.user) %>
  <% if signed_in? && current_user.id == post.user_id %>
-    <%= link_to '削除', users_user_post_path(post.id),method: :delete, "data-confirm" => "本当に削除しますか？" %>
+ <%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
  <% end %>
 </div>
+
 <% end %>

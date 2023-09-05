@@ -19,15 +19,22 @@ sessions: 'users/sessions'
 
 namespace :users do
   resources :users, only: [:edit, :show, :update, :destroy] do
-    resources :posts, only: [:show , :destroy]
+    resources :posts, only: [:show ]
     #member do
     #  get 'posts'
     #  get 'favorites'
     #end
   end
-  resources :posts, only: [:index, :new, :create]
+  resources :posts, only: [:index, :new, :create, :destroy ]
   get 'users/confirm/:id'  => 'users#confirm'
 end
+  resources :posts do
+    resources :introduction, only: :create
+    member do
+      get 'search'
+    end
+  end
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 

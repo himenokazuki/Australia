@@ -25,10 +25,26 @@ class Users::PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
+    if @post.user.id == current_user.id
+      if @post.destroy
+        redirect_to users_posts_path(@post.user.id), notice: '投稿が削除されました。' and return
+      else
+        redirect_to users_posts_path(@post.user.id), alert: '投稿の削除に失敗しました。' and return
+      end
+    end
     redirect_to users_user_path(current_user)
+
   end
 
+  def search
+    if params[:keyword].present?
+      @post = Introduction.where('caption LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @post = Post.all
+    end
+  end
+  
   private
   # ストロングパラメータ
   def post_params
