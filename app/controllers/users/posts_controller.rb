@@ -1,8 +1,8 @@
 class Users::PostsController < ApplicationController
   def index
-   @user=current_user
-   @post=Post.new
-   @posts=Post.all
+   @user = current_user
+   @post = Post.new
+   @posts = Post.all
   end
 
   def show
@@ -38,13 +38,14 @@ class Users::PostsController < ApplicationController
 
   def search
     if params[:keyword].present?
-      @post = Introduction.where('caption LIKE ?', "%#{params[:keyword]}%")
+      @posts = Post.where('introduction LIKE ?', "%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
-      @post = Post.all
+      @keyword = "投稿が見つかりませんでした。"
+      @posts = []
     end
   end
-  
+
   private
   # ストロングパラメータ
   def post_params

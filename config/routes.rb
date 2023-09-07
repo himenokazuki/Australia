@@ -6,6 +6,9 @@ get 'users/index' => "users#index"
 get 'users/edit'  =>  "users#edit"
 get 'posts/show'  =>  "posts#show"
 get 'posts/index' => "posts#index"
+resources :posts, only: [:destroy ]
+get 'homes/top'
+    delete '/admin/sign_out'=>'sessions#destroy'
 end
 
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -27,14 +30,15 @@ namespace :users do
   end
   resources :posts, only: [:index, :new, :create, :destroy ]
   get 'users/confirm/:id'  => 'users#confirm'
+  get 'posts/search'  => 'posts#search'
 end
   resources :posts do
     resources :introduction, only: :create
-    member do
-      get 'search'
-    end
+    #member do
+      #get 'search'
+    #end
   end
-  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 
