@@ -1,4 +1,4 @@
-<h1>ユーザー投稿一覧</h1>
+<h1>管理側ユーザー投稿一覧</h1>
 
 
 <% @posts.each do |post| %>
@@ -12,7 +12,7 @@
  </tr>
 
  <tr>
-   <td><%= image_tag post.get_image %></td>
+   <td><%= image_tag post.get_image(100,100) %></td>
    <td><%= link_to post.user.name,admin_posts_show_path %></td>
    <td><%= post.introduction %></td>
    <td><%= link_to '削除', admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>

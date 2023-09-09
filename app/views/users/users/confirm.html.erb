@@ -1,2 +1,4 @@
-<h1>ご利用ありがとうございました</h1>
-<%#= link_to "新規登録する", new_user_registration_path, method: :get %>
+<h1>退会するとデータを復元することができません。</h1>
+
+<%= link_to "退会する", users_user_path, method: :delete, "data-confirm" => "本当に退会しますか？"%>
+<%= link_to "マイページに戻る", users_user_path(current_user.id), method: :get %>

@@ -1,8 +1,20 @@
-<h1>詳細画面</h1>
+<h1>マイページ</h1>
 <%= @user.name %>
 <% @posts.each do |post| %>
-  <div>
-    <%= post.introduction %>
-    <%= image_tag post.get_image %>
-  </div>
+
+<table>
+ <tr>
+   <th>投稿画像</th>
+   <th>投稿者</th>>
+   <th>投稿内容</th>
+   <th></th>
+ </tr>
+ 
+ <tr>
+    <td><%= image_tag post.get_image(100, 100) %></td>
+    <td><%= link_to post.user.name,users_user_path %></td>
+    <td><%= post.introduction %></td>
+    <td><%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+ </tr>
+</table>
 <% end %>

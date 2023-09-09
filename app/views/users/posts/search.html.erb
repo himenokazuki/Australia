@@ -2,9 +2,9 @@
   <ul>
     <% @posts.each do |post| %>
 
-        <%= link_to post_path(post.id) do %>
-          <%= image_tag post.get_image %>
-          <%= link_to post.user.name, users_user_path(post.user) %>
+        <%= link_to users_user_post_path(post.user, post.id) do %>
+          <%= image_tag post.get_image(100, 100) %>
+          <%= link_to post.user.name, users_user_post_path(post.user, post.id) %>
         <% end %>
 
     <% end %>

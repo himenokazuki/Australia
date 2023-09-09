@@ -1,2 +1,21 @@
-<h1>Users::Posts#show</h1>
-<p>Find me in app/views/users/posts/show.html.erb</p>
+<h1>投稿者詳細画面</h1>
+
+<%= @user.name %>
+<% @posts.each do |post| %>
+
+<table>
+ <tr>
+   <th>投稿画像</th>
+   <th>投稿者</th>>
+   <th>投稿内容</th>
+   <th></th>
+ </tr>
+ 
+ <tr>
+    <td><%= image_tag post.get_image(100, 100) %></td>
+    <td><%= user.name %></td>
+    <td><%= post.introduction %></td>
+    <td><%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+ </tr>
+</table>
+<% end %>

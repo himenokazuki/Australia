@@ -4,10 +4,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
          has_many :posts, dependent: :destroy
          has_one_attached :profile_image
-         validates :name, length: { in: 2..20}, uniqueness: true
+        validates :name, length: { in: 2..20}, uniqueness: true
          #validates :introduction, length: { maximum: 50 }
  def get_profile_image(width, height)
   unless profile_image.attached?
