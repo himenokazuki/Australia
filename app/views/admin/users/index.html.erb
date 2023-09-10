@@ -1,0 +1,23 @@
+<h1>ユーザー一覧</h1>
+<% @posts.each do |post| %>
+<table>
+ <tr>
+   <th>ユーザー</th>
+   <th></th>
+   <th></th>
+ </tr>
+
+ <tr>
+   <td><%=post.user.name %></td>
+   <td><%= link_to '強制退会', admin_user_path(post.user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %></td>
+   <td>
+     <% if post.user.is_deleted %>
+       <p>退会済み</p>
+     <% else %>
+       <p>入会中</p>
+     <% end %>
+   </td>
+ </tr>
+</table>
+<% end %>
+    <%= link_to 'トップページ', admin_homes_top_path, method: :get %>

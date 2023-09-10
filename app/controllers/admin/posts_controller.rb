@@ -4,14 +4,15 @@ class Admin::PostsController < ApplicationController
   end
 
   def index
+     @posts = Post.all
   end
-  
+
   def edit
   end
-  
+
   def destroy
-    @posts = Post.all
-    posts.destroy
-    redirect_to homes_top_path
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to admin_homes_top_path
   end
 end

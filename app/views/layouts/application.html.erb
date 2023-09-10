@@ -16,7 +16,7 @@
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         <%= link_to "退会する", users_path(current_user.id), method: :get %>
-        <%= link_to "編集する", edit_users_user_path(current_user.id), method: :get %>
+        <%#= link_to "編集する", edit_users_user_path(current_user.id), method: :get %>
         <%= link_to "投稿一覧", users_posts_path, method: :get %>
         <%= link_to "新規投稿", new_users_post_path, method: :get %>
         <%= link_to "マイページ", users_user_path(current_user.id), method: :get %>
@@ -26,6 +26,8 @@
       <% if admin_signed_in? %>
         <li>
           <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+          <%= link_to 'ユーザー一覧',admin_users_index_path, method: :get %>
+        
         </li>
       <% else %>
         <li>

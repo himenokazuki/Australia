@@ -6,9 +6,9 @@ class Users::PostsController < ApplicationController
   end
 
   def show
-    @posts = Post.find(params[:id])
-    @user = Post.find(params{:id})
-    @user = current_user
+    @post = Post.find(params[:id])
+    # @user = User.find(params[:user_id])
+    # @user = current_user
     #@posts = Post.all
     #@post_new = Post.new
   end

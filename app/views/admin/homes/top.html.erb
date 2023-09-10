@@ -1,21 +1,28 @@
 <h1>管理側ユーザー投稿一覧</h1>
 
-
-<% @posts.each do |post| %>
-
 <table>
  <tr>
    <th>投稿画像</th>
-   <th>投稿者</th>>
+   <th>投稿者</th>
    <th>投稿内容</th>
    <th></th>
+   <th>ステータス</th>
  </tr>
+<% @posts.each do |post| %>
 
  <tr>
    <td><%= image_tag post.get_image(100,100) %></td>
-   <td><%= link_to post.user.name,admin_posts_show_path %></td>
+   <td><%= link_to post.user.name,admin_users_show_path %></td>
    <td><%= post.introduction %></td>
-   <td><%= link_to '削除', admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+   <td><%= link_to '投稿削除', admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+   <td><%= link_to '強制退会', admin_user_path(post.user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %></td>
+   <td>
+     <% if post.user.is_deleted %>
+       <p>退会済み</p>
+     <% else %>
+       <p>  入会中</p>
+     <% end %>
+   </td>
  </tr>
 </table>
   <% end %>

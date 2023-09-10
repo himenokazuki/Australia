@@ -11,7 +11,9 @@
 <% @posts.each do |post| %>
 <div>
 <%= post.introduction %>
-<%= image_tag post.get_image(100,100) %>
+<%= link_to users_post_path(post) do %>
+    <%= image_tag post.get_image(100,100) %>
+<% end %>
 <%= link_to post.user.name, users_user_path(post.user) %>
 <% if signed_in? && current_user.id == post.user_id %>
 <%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>

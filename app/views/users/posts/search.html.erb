@@ -1,11 +1,27 @@
  <h2>検索結果 "<%= @keyword %>"</h2>
-  <ul>
-    <% @posts.each do |post| %>
+  <% @posts.each do |post| %>
 
-        <%= link_to users_user_post_path(post.user, post.id) do %>
-          <%= image_tag post.get_image(100, 100) %>
-          <%= link_to post.user.name, users_user_post_path(post.user, post.id) %>
+<table>
+ <tr>
+   <th>投稿画像</th>
+   <th>投稿者</th>
+   <th>投稿内容</th>
+   <th></th>
+ </tr>
+
+ <tr>
+    <td>
+      <%= link_to users_post_path(post) do %>
+        <%= image_tag post.get_image(100, 100) %>
+      <% end %>
+    </td>
+    <td><%= link_to post.user.name, users_user_path(post.user) %></td>
+    <td><%= post.introduction %></td>
+    <td>
+        <% if post.user == current_user %>
+            <%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
         <% end %>
-
-    <% end %>
-  </ul>
+    </td>
+ </tr>
+</table>
+<% end %>

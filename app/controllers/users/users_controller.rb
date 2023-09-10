@@ -1,9 +1,9 @@
 class Users::UsersController < ApplicationController
   def show
-    @user = current_user
+    # @user = current_user
     @user = User.find(params[:id])
     @posts = @user.posts
-    @user = Post.find(params{:id})
+
   end
 
   def edit

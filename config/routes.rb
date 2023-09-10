@@ -7,6 +7,7 @@ get 'users/edit'  =>  "users#edit"
 get 'posts/show'  =>  "posts#show"
 get 'posts/index' => "posts#index"
 resources :posts, only: [:destroy ]
+resources :users, only: [:destroy ,:update]
 get 'homes/top'
     delete '/admin/sign_out'=>'sessions#destroy'
 end
@@ -21,23 +22,25 @@ sessions: 'users/sessions'
 }
 
 namespace :users do
+  get 'users/confirm/:id'  => 'users#confirm'
   resources :users, only: [:edit, :show, :update, :destroy] do
-    resources :posts, only: [:show ]
+    # resources :posts, only: [:show ]
     #member do
     #  get 'posts'
     #  get 'favorites'
     #end
   end
-  resources :posts, only: [:index, :new, :create, :destroy ]
-  get 'users/confirm/:id'  => 'users#confirm'
   get 'posts/search'  => 'posts#search'
+  resources :posts, only: [:index, :new, :show, :create, :destroy]
+
 end
-  resources :posts do
-    resources :introduction, only: :create
-    #member do
-      #get 'search'
-    #end
-  end
+  # TODO: ルーティングで不具合が発生したら戻すところ
+  # resources :posts do
+  #   resources :introduction, only: :create
+  #   #member do
+  #     #get 'search'
+  #   #end
+  # end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
