@@ -23,17 +23,22 @@ sessions: 'users/sessions'
 
 namespace :users do
   get 'users/confirm/:id'  => 'users#confirm'
-  resources :users, only: [:edit, :show, :update, :destroy] do
+  resources :users, only: [:edit, :show, :update, :destroy, :index] do
+    member do
+      get :follows, :followers
+    end
+      resource :relationships, only: [:create, :destroy]
+  end
     # resources :posts, only: [:show ]
     #member do
     #  get 'posts'
     #  get 'favorites'
     #end
-  end
   get 'posts/search'  => 'posts#search'
   resources :posts, only: [:index, :new, :show, :create, :destroy]
 
 end
+
   # TODO: ルーティングで不具合が発生したら戻すところ
   # resources :posts do
   #   resources :introduction, only: :create
