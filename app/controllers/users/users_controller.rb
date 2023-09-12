@@ -1,7 +1,7 @@
 class Users::UsersController < ApplicationController
   def show
     # @user = current_user
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
     @posts = @user.posts
     @following_users = @user.following_users
     @follower_users = @user.follower_users
@@ -14,13 +14,16 @@ class Users::UsersController < ApplicationController
   end
 
   def edit
+    #is_matching_login_user
+    @user = current_user
+    @users= User.find(params[:id])
   end
 
   def update
-    @user = current_customer
-   if  @user.update(customer_params)
+    @user = current_user
+   if  @user.update(user_params)
         flash[:notice] = "successfully "
-        redirect_to new_user_registration_path(@user.id)
+        redirect_to users_user_path(@user.id)
    end
   end
   
@@ -44,6 +47,7 @@ class Users::UsersController < ApplicationController
   def follows
     user = User.find(params[:id])
     @users = user.following_users
+    #byebug
   end
 
     # フォロワー一覧
