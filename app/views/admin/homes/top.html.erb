@@ -1,10 +1,13 @@
 <h1>管理側ユーザー投稿一覧</h1>
+<h2><%= flash[:notice] %></h2>
 
 <table>
  <tr>
    <th>投稿画像</th>
    <th>投稿者</th>
    <th>投稿内容</th>
+   <th></th>
+   <th></th>
    <th></th>
    <th>ステータス</th>
  </tr>
@@ -16,6 +19,7 @@
    <td><%= post.introduction %></td>
    <td><%= link_to '投稿削除', admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
    <td><%= link_to '強制退会', admin_user_path(post.user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %></td>
+   <td><%= link_to '退会取消', admin_reactivate_path(post.user.id), method: :patch %></td>
    <td>
      <% if post.user.is_deleted %>
        <p>退会済み</p>

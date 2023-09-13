@@ -39,6 +39,8 @@ class Users::UsersController < ApplicationController
     redirect_to new_user_registration_path
   end
   
+ 
+  
   def user_params
     params.require(:user).permit(:name, :profile_image,:introduction)
   
@@ -46,14 +48,14 @@ class Users::UsersController < ApplicationController
     # フォロー一覧
   def follows
     user = User.find(params[:id])
-    @users = user.following_users
+    @users = user.follower_users
     #byebug
   end
 
     # フォロワー一覧
   def followers
     user = User.find(params[:id])
-    @user = user.follower_users
+    @user = user.following_users
   end
 
 end

@@ -4,8 +4,10 @@ namespace :admin do
 get 'users/show'  => "users#show"
 get 'users/index' => "users#index"
 get 'users/edit'  =>  "users#edit"
+patch 'users/:id/reactivate' => "users#reactivate", as: "reactivate"
 get 'posts/show'  =>  "posts#show"
 get 'posts/index' => "posts#index"
+
 resources :posts, only: [:destroy ]
 resources :users, only: [:destroy ,:update]
 get 'homes/top'

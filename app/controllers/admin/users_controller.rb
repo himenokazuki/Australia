@@ -27,4 +27,12 @@ class Admin::UsersController < ApplicationController
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to admin_homes_top_path
   end
+
+   def reactivate
+    @user = User.find(params[:id])
+    @user.update(is_deleted: false)
+    reset_session
+    flash[:notice] = "退会処理を取り消しました。"
+    redirect_to admin_homes_top_path
+   end
 end
