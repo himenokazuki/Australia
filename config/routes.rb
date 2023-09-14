@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 root to: 'homes#top'
 namespace :admin do
-get 'users/show'  => "users#show"
+get 'users/:id/show'  => "users#show", as: "users_show"
 get 'users/index' => "users#index"
 get 'users/edit'  =>  "users#edit"
 patch 'users/:id/reactivate' => "users#reactivate", as: "reactivate"
@@ -24,7 +24,7 @@ sessions: 'users/sessions'
 }
 
 namespace :users do
-  get 'users/confirm/:id'  => 'users#confirm'
+  get 'users/confirm/:id'  => 'users#confirm' 
   resources :users, only: [:edit, :show, :update, :destroy, :index] do
     member do
       get :follows, :followers
@@ -38,7 +38,7 @@ namespace :users do
     #end
   get 'posts/search'  => 'posts#search'
   resources :posts, only: [:index, :new, :show, :create, :destroy]
-
+   patch 'users/comments/:id' => "users#comments", as: "comments"
 end
 
   # TODO: ルーティングで不具合が発生したら戻すところ

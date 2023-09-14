@@ -15,7 +15,7 @@
 
  <tr>
    <td><%= image_tag post.get_image(100,100) %></td>
-   <td><%= link_to post.user.name,admin_users_show_path %></td>
+   <td><%= link_to post.user.name,admin_users_show_path(post.user.id) %></td>
    <td><%= post.introduction %></td>
    <td><%= link_to '投稿削除', admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
    <td><%= link_to '強制退会', admin_user_path(post.user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %></td>
