@@ -24,7 +24,7 @@ sessions: 'users/sessions'
 }
 
 namespace :users do
-  get 'users/confirm/:id'  => 'users#confirm' 
+  get 'users/confirm/:id'  => 'users#confirm'
   resources :users, only: [:edit, :show, :update, :destroy, :index] do
     member do
       get :follows, :followers
@@ -37,8 +37,11 @@ namespace :users do
     #  get 'favorites'
     #end
   get 'posts/search'  => 'posts#search'
-  resources :posts, only: [:index, :new, :show, :create, :destroy]
-   patch 'users/comments/:id' => "users#comments", as: "comments"
+  resources :posts, only: [:index, :new, :show, :create, :destroy] do
+  resources :comments, only: [:destroy, :create]
+  end
+
+
 end
 
   # TODO: ルーティングで不具合が発生したら戻すところ
@@ -51,4 +54,3 @@ end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
-

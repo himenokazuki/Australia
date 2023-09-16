@@ -1,15 +1,10 @@
 <%= render 'admin/users/user_detail', user: @user, posts: @posts %>
 <div>
-  <p>コメント件数：<%= @posts.comment.count %></p>
-  <% @posts.comments.each do |comment| %>
+  <p>コメント件数：<%= current_user.comments.count %></p>
+  <% current_user.comments.each do |comment| %>
+    <p><%#= comment.post.user.name %></p>
     <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-  <% end %>
-</div>
-<div>
-  <%= form_with model: [@posts, @comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
   <% end %>
 </div>

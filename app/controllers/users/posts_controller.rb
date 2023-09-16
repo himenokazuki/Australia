@@ -3,11 +3,14 @@ class Users::PostsController < ApplicationController
    @user = current_user
    @post = Post.new
    @posts = Post.all
+   
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+    @comments = @post.comments
+    
     # @user = User.find(params[:user_id])
     # @user = current_user
     #@posts = Post.all
@@ -52,6 +55,6 @@ class Users::PostsController < ApplicationController
   private
   # ストロングパラメータ
   def post_params
-    params.require(:post).permit(:introduction, :image)
+    params.require(:post).permit(:introduction, :image, :created_at, :updated_at)
   end
 end

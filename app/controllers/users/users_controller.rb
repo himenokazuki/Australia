@@ -2,12 +2,13 @@ class Users::UsersController < ApplicationController
   def show
     # @user = current_user
     @user = User.find(params[:id])
+    @comment = Comment.new
     @posts = @user.posts
     @following_users = @user.following_users
     @follower_users = @user.follower_users
 
   end
-  
+
   def index
     @users = User.all
     @posts = Post.all
@@ -26,7 +27,7 @@ class Users::UsersController < ApplicationController
         redirect_to users_user_path(@user.id)
    end
   end
-  
+
   def confirm
   end
 
@@ -38,13 +39,13 @@ class Users::UsersController < ApplicationController
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to new_user_registration_path
   end
-  
- 
-  
+
+
+
   def user_params
     params.require(:user).permit(:name, :profile_image,:introduction)
-  
   end
+  
     # フォロー一覧
   def follows
     user = User.find(params[:id])
@@ -57,5 +58,4 @@ class Users::UsersController < ApplicationController
     user = User.find(params[:id])
     @user = user.following_users
   end
-
 end

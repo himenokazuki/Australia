@@ -11,6 +11,7 @@
 <th>投稿内容</th>
 <th>投稿画像</th>
 <th>投稿者</th>
+<th><%#= @post.created_at.strftime('%Y/%m/%d') %></th>
 </tr>
 <% @posts.each do |post| %>
 
