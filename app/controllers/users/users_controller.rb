@@ -1,6 +1,6 @@
 class Users::UsersController < ApplicationController
   def show
-    # @user = current_user
+    @user = current_user
     @user = User.find(params[:id])
     @comment = Comment.new
     @posts = @user.posts
@@ -45,17 +45,17 @@ class Users::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile_image,:introduction)
   end
-  
+
     # フォロー一覧
   def follows
     user = User.find(params[:id])
-    @users = user.follower_users
+    @users = user.following_users
     #byebug
   end
 
     # フォロワー一覧
   def followers
     user = User.find(params[:id])
-    @user = user.following_users
+    @user = user.follower_users
   end
 end

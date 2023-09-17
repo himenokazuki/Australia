@@ -11,7 +11,6 @@
 <th>投稿内容</th>
 <th>投稿画像</th>
 <th>投稿者</th>
-<th><%#= @post.created_at.strftime('%Y/%m/%d') %></th>
 </tr>
 <% @posts.each do |post| %>
 
@@ -20,7 +19,7 @@
 <%= link_to users_post_path(post) do %>
     <%= image_tag post.get_image(100,100) %>
 <% end %>
-<%= link_to post.user.name, users_user_path(post.user) %>
+<%= link_to post.user.name, users_user_path(post.user) %><%= l(post.created_at, format: :date) %>投稿
 <% if signed_in? && current_user.id == post.user_id %>
 <%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 <% end %>

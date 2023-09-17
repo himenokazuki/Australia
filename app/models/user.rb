@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
          has_many :posts, dependent: :destroy
          has_many :comments, dependent: :destroy
-         
+
          has_one_attached :profile_image
         validates :name, length: { in: 2..20}, uniqueness: true
          #validates :introduction, length: { maximum: 50 }
@@ -23,17 +23,18 @@ class User < ApplicationRecord
 
          #　フォローしたときの処理
  def follow(user_id)
-  followeds.create(follower_id: user_id)
+   followers.create(followed_id: user_id)
  end
 
  #　フォローを外すときの処理
  def unfollow(user_id)
-  followeds.find_by(follower_id: user_id).destroy
+   followers.find_by(followed_id: user_id).destroy
  end
 
  #フォローしていればtrueを返す
  def following?(user)
-  follower_users.include?(user)
+  following_users.include?(user)
+  #followers_users.include?(user)
  end
 
  def get_profile_image(width, height)

@@ -5,6 +5,7 @@ class Relationship < ApplicationRecord
  #　フォローしたときの処理
  def follow(user_id)
   followers.create(followed_id: user_id)
+  #Relationship.create(follower_id: current_user.id, followed_id: user_id)
  end
 
  #　フォローを外すときの処理
