@@ -25,6 +25,7 @@ sessions: 'users/sessions'
 
 namespace :users do
   get 'users/confirm/:id'  => 'users#confirm'
+  get 'users/search'  => 'users#search'
   resources :users, only: [:edit, :show, :update, :destroy, :index] do
     member do
       get :follows, :followers
@@ -37,6 +38,7 @@ namespace :users do
     #  get 'favorites'
     #end
   get 'posts/search'  => 'posts#search'
+  
   resources :posts, only: [:index, :new, :show, :create, :destroy] do
   resources :comments, only: [:destroy, :create]
   end

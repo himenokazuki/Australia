@@ -40,6 +40,9 @@ class Users::UsersController < ApplicationController
     redirect_to new_user_registration_path
   end
 
+  #def search
+  
+  #end
 
 
   def user_params

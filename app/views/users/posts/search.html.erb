@@ -1,6 +1,18 @@
- <h2>検索結果 "<%= @keyword %>"</h2>
+ <h2>検索結果 "<%= @content %>"</h2>
+ <% if @users.present? %>
+ <% @users.each do |user| %>
+<td>
+      <%= link_to users_post_path(post) do %>
+      <%= image_tag post.get_image(100, 100) %>
+<% end %>
+</td>
+  <td><%= link_to post.user.name, users_user_path(post.user) %></td>
+  <td><%= post.introduction %></td>
+  
+ <% end %>
+ <% end %> 
+ <% if @posts.present? %>
   <% @posts.each do |post| %>
-
 <table>
  <tr>
    <th>投稿画像</th>
@@ -22,6 +34,8 @@
             <%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
         <% end %>
     </td>
- </tr>
-</table>
+  </tr>
+ </table>
+ <% end %>
+ 
 <% end %>
