@@ -43,8 +43,8 @@ class Users::PostsController < ApplicationController
   end
 
   def search
-    @user = User.find(params[:id])
-    #@posts = @user.posts
+    #@user = User.find(params[:id])
+   # @posts = @user.posts
     
     # viewのform_tagにて
     # 選択したmodelの値を@modelに代入。

@@ -1,16 +1,14 @@
  <h2>検索結果 "<%= @content %>"</h2>
  <% if @users.present? %>
- <% @users.each do |user| %>
-<td>
-      <%= link_to users_post_path(post) do %>
-      <%= image_tag post.get_image(100, 100) %>
-<% end %>
-</td>
-  <td><%= link_to post.user.name, users_user_path(post.user) %></td>
-  <td><%= post.introduction %></td>
-  
+  <% @users.each do |user| %>
+   <td>
+    <%= render 'admin/users/user_detail', user: user, posts: user.posts %>
+   </td>
+   <td><%= link_to user.name, users_user_path(user) %></td>
+   <td><%#= post.introduction %></td>
+
+  <% end %>
  <% end %>
- <% end %> 
  <% if @posts.present? %>
   <% @posts.each do |post| %>
 <table>
@@ -37,5 +35,5 @@
   </tr>
  </table>
  <% end %>
- 
+
 <% end %>
