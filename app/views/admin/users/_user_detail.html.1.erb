@@ -1,51 +1,53 @@
-<div class="container">
-  <div class="row justify-content-end">
-    <div>
-     <div>user_info</div>
-     <% if user.profile_image.attached? %>
-     <%= image_tag user.profile_image %>
-     <% end %>
-    </div>
-   <div class="pt-3">
-     <div>name   <%= user.name %></div>
-     <div class="d-flex">
-       <div>Followers</div>
-       <div>
-         <%= link_to followers_users_user_path(user) do %>
-         <h6><%= user.follower_users.count %></h6>
-         <% end %>
-       </div>
-     </div>
-     <div class="d-flex">
-       <div>Follows</div>
-       <div>
-         <%= link_to follows_users_user_path(user) do %>
-         <h6><%= user.following_users.count %></h6>
-         <% end %>
-       </div>
-     </div>
-     <div>
-     <% if current_user.present? %>
+<h1>user_info</h1>
+
+<table>
+    <tr>
+    <% if user.profile_image.attached? %>
+    <%= image_tag user.profile_image %>
+    <% end %>
+
+    <p>name   <%= user.name %></p>
+</table
+
+<th>Followers</th>
+      <td>
+ <%= link_to followers_users_user_path(user) do %>
+          <h6><%= user.follower_users.count %></h6>
+        <% end %>
+      </td>
+    </tr>
+      <tr>
+        <th>Follows</th>
+        <td>
+           <%= link_to follows_users_user_path(user) do %>
+            <h6><%= user.following_users.count %></h6>
+                 <% end %>
+        </td>
+      </tr>
+      <tr>
+      <td>
+    <% if current_user.present? %>
+
       <% if current_user != user %>
           <% if current_user.following?(user) %>
             <%= link_to "フォロー外す", users_user_relationships_path(user.id), method: :delete, class: "btn btn-danger" %>
           <% else %>
             <%= link_to "フォローする", users_user_relationships_path(user.id), method: :post, class:"btn btn-success" %>
           <% end %>
-       <% end %>
-     <% end %>
-     </div>
-     <% if current_user.present? %>
+      <% end %>
+    <% end %>
+      </td>
+    <% if current_user.present? %>
      <% if user == current_user %>
       <p><%= link_to "プロフィール編集", edit_users_user_path(user) %></p>
      <% end %>
     <% end %>
-   </div>
-  </div>
-</div>
+
+
 <table>
  <tr>
    <th>投稿画像</th>
+   <th>投稿者</th>
    <th>投稿内容</th>
    <th></th>
  </tr>
@@ -56,7 +58,7 @@
         <%= image_tag post.get_image(200, 200) %>
       <% end %>
     </td>
-   
+    <td><%= link_to post.user.name, users_user_path(post.user) %></td>
     <td><%= post.introduction %></td>
     <td>
     <% if current_user.present? %>

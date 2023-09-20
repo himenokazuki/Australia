@@ -6,21 +6,31 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/06df141a7c.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
      <header>
+       <nav class = "navbar navbar-expand-lg navbar-dark bg-dark">
     <% if user_signed_in? %>
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+         <i class="fa-solid fa-bed" style="color: #f20202;"></i>
+         
         <%= link_to "退会する", users_path(current_user.id), method: :get %>
+        <i class="fa-solid fa-person-running" style="color: #eb000c;"></i>
         <%#= link_to "編集する", edit_users_user_path(current_user.id), method: :get %>
         <%= link_to "投稿一覧", users_posts_path, method: :get %>
+        <i class="fa-solid fa-image" style="color: #fa0008;"></i>
+        
         <%= link_to "新規投稿", new_users_post_path, method: :get %>
+        <i class="fa-solid fa-plus" style="color: #fb0909;"></i>
+        
         <%= link_to "マイページ", users_user_path(current_user.id), method: :get %>
-
+        <i class="fa-solid fa-house" style="color: #fd0820;"></i>
+        
       <%= form_with url: users_posts_search_path, local: true, method: :get do |f| %>
       <%= f.text_field :keyword %>
       <%= select_tag 'model', options_for_select({ "User" => "user", "Post" => "post" }) %>
@@ -34,19 +44,26 @@
       <% if admin_signed_in? %>
         <li>
           <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+          <i class="fa-solid fa-right-from-bracket" style="color: #fa0511;"></i>
           <%= link_to 'ユーザー一覧',admin_users_index_path, method: :get %>
+          <i class="fa-light fa-users-viewfinder" style="color: #fd0851;"></i>
 
         </li>
       <% else %>
         <li>
           <%= link_to "新規登録", new_user_registration_path %>
+          <i class="fa-solid fa-user-plus" style="color: #e70d0d;"></i>
         </li>
         <li>
+          
           <%= link_to "ログイン", new_user_session_path %>
+         <i class="fa-solid fa-right-to-bracket" style="color: #f70844;"></i>
         </li>
       <% end %>
     <% end %>
+    
   </header>
     <%= yield %>
   </body>
 </html>
+
