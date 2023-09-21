@@ -1,10 +1,45 @@
-<%= render 'admin/users/user_detail', user: @user, posts: @posts %>
-<div>
-  <p>コメント件数：<%= current_user.comments.count %></p>
-  <% current_user.comments.each do |comment| %>
-    <p><%= comment.post.user.name %></p>
-    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
-    <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-  <% end %>
+<div class="container" style="height:100vh">
+  <div class="row" style="height:100vh">
+    <div class="col-md-3 border-right">
+      <%= render 'users/users/user_detail', user: @user %>
+    </div>
+
+    <div class="col-md-9">
+      <table class="ml-3 table" style="width:800px">
+       <tr>
+         <th>投稿画像</th>
+         <th>投稿内容</th>
+         <th></th>
+         <th>コメント</th>
+       </tr>
+      <% @posts.each do |post| %>
+       <tr>
+          <td style="width:200px">
+            <%= link_to users_post_path(post) do %>
+              <%= image_tag post.get_image(200, 200) %>
+            <% end %>
+          </td>
+
+          <td style="width:200px"><%= post.introduction %></td>
+          <td style="width:200px">
+          <% if current_user.present? %>
+            <% if post.user == current_user %>
+             <%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+            <% end %>
+          <% end %>
+          <td>
+
+              コメント件数：<%= current_user.comments.count %>
+              <% current_user.comments.each do |comment| %>
+                <div>
+                  <%= comment.user.name %>
+                  <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+                </div>
+              <% end %>
+          </td>
+       </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
 </div>

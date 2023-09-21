@@ -1,28 +1,34 @@
-<h1>投稿一覧</h1>
-
- <%#= form_with url: users_posts_search_path, local: true, method: :get do |f| %>
+<div class="container">
+  <div class="row justify-content-start">
+    <h1>投稿一覧</h1>
+  </div>
+<%#= form_with url: users_posts_search_path, local: true, method: :get do |f| %>
     <%#= f.text_field :keyword %>
     <%#= f.submit "検索" %>
  <%# end %>
-<div>
   <%= notice %>
+  <div class="row">
+    
+    <div class="col-2">投稿画像</div>
+    <div class="col-4">投稿内容</div>
+    <div class="col-2">投稿者</div>
+    <div class="col-4"></div>
+  </div>
+  <% @posts.each do |post| %>
+    <div class="row mb-4">
+      <div class="col-2">
+        <%= link_to users_post_path(post) do %>
+          <%= image_tag post.get_image(100,100) %>
+        <% end %>
+      </div>
+    
+      <div class="col-3"><%= post.introduction %></div>
+      <div class="col-4"><%= link_to post.user.name, users_user_path(post.user) %><%= l(post.created_at, format: :date) %>投稿</div>
+      <div class="col-2">
+      <% if signed_in? && current_user.id == post.user_id %>
+        <%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
-<tr>
-<th>投稿内容</th>
-<th>投稿画像</th>
-<th>投稿者</th>
-</tr>
-<% @posts.each do |post| %>
-
-<div>
-<%= post.introduction %>
-<%= link_to users_post_path(post) do %>
-    <%= image_tag post.get_image(100,100) %>
-<% end %>
-<%= link_to post.user.name, users_user_path(post.user) %><%= l(post.created_at, format: :date) %>投稿
-<% if signed_in? && current_user.id == post.user_id %>
-<%= link_to '削除', users_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-<% end %>
-</div>
-
-<% end %>

@@ -1,6 +1,7 @@
 class Users::UsersController < ApplicationController
   def show
     @user = current_user
+    #@post = Post.find(params[:id])
     @user = User.find(params[:id])
     @comment = Comment.new
     @posts = @user.posts
